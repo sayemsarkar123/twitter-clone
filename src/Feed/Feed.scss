@@ -1,0 +1,29 @@
+@import '../Style/Style';
+
+.feed{
+    flex: 0.4;
+    border-right: 1px solid $twitter-background;
+    min-width: fit-content;
+    overflow-y: scroll;
+}
+/* hide scrollbar for chrome safari opera */
+.feed::-webkit-scrollbar{
+    display: none;
+}
+/* hide scrollbar for IE, Edge and Firefox */
+.feed{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.feed__header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    border: 1px solid $twitter-background;
+    padding: 15px 20px;
+  }
+  .feed__header>h2{
+      font-size: 20px;
+      font-weight: 800;
+  }
