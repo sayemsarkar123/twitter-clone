@@ -4,13 +4,18 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-}
-.sidebarOption:hover{
+
+    &:hover{
     background-color: #e8f5fe;
     border-radius: 30px;
     color: $twitter-color;
     transition: color 100ms ease-out;
+    }
+    &:active{
+    color: $twitter-color;
+    }
 }
+
 .sidebarOption> .MuiSvgIcon-root {
     padding: 20px;
 }
