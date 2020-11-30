@@ -2,8 +2,10 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faSearch, faUser, faChartArea } from '@fortawesome/free-solid-svg-icons';
+import { useHistory } from 'react-router';
 
 const Main: React.FC = () => {
+  const history = useHistory();
   return (
     <div className="container-fluid px-0">
       <div className="row vh-100">
@@ -23,8 +25,8 @@ const Main: React.FC = () => {
               <span style={{ fontSize: '2.5rem', color: '#1da1f2' }}><FontAwesomeIcon icon={faTwitter} /></span>
               <h3 className="font-weight-bold mt-4 mb-5">See what’s happening in <br /> the world right now</h3>
               <h6 className="font-weight-bold">Join Twitter today.</h6>
-              <button className="btn btn-primary btn-block rounded-pill font-weight-bold my-3">Sign Up</button>
-              <button className="btn btn-outline-primary btn-block rounded-pill text-primary font-weight-bold">Login</button>
+              <button onClick={() => history.push('/signup')} className="btn btn-primary btn-block rounded-pill font-weight-bold my-3">Sign Up</button>
+              <button onClick={() => history.push('/login')} className="btn btn-outline-primary btn-block rounded-pill text-primary font-weight-bold">Login</button>
             </div>
           </div>
         </div>
