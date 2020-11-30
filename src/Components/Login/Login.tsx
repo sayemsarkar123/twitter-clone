@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
   return (
@@ -22,8 +23,8 @@ const Login: React.FC = () => {
               <input className="btn btn-primary btn-block py-2 rounded-pill font-weight-bold" type="button" value="Log in"/>
             </form>
             <div className="mt-3">
-              <a className="d-inline-block" href="#">Forgot password?</a>
-            <a className="d-inline-block ml-3" href="#">Sign up for Twitter</a>
+              <Link className="d-inline-block" to="#">Forgot password?</Link>
+              <Link className="d-inline-block ml-3" to="#">Sign up for Twitter</Link>
             </div>
           </div>
         </div>
