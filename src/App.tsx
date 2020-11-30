@@ -1,17 +1,11 @@
 import React from 'react';
-import './App.scss';
-import Sidebar from './Components/Sidebar/Sidebar';
-import Feed from './Feed/Feed';
-import Widgets from './Widgets/Widgets.js';
+import Home from './Components/Home/Home';
+import Main from './Components/Main/Main';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <Sidebar />  
-      <Feed />
-      <Widgets />
-    </div>
+    <Main></Main>
   );
-}
+};
 
 export default App;
