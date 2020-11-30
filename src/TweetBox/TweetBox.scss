@@ -13,12 +13,14 @@
 .tweetBox__input{
     padding: 20px;
     display: flex;
+    outline: none;
 }
 .tweetBox__input>input{
     flex: 1;
     margin-left: 20px;
     font-size: 20px;
     border: none;
+    outline: none;
 }
 .tweetBox__tweetBtn{
     background-color: $twitter-color !important;

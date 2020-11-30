@@ -2,7 +2,7 @@ import React from 'react';
 import './SidebarOption.scss';
 
 const SidebarOption = (props: any) => {
-    const {text, Icon} = props.data;
+    const { text, Icon } = props.data;
     return (
         <div className="sidebarOption">
             <Icon />
@@ -12,3 +12,4 @@ const SidebarOption = (props: any) => {
 };
 
 export default SidebarOption;
+
