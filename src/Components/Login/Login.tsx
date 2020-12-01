@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import firebase from "firebase/app";
+import "firebase/auth";
+import { firebaseConfig } from '../firebaseConfig/firebaseConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { LoginContext } from '../../App';
+import { useHistory, useLocation } from 'react-router';
+
+type Inputs = {
+  email: string;
+  password: string;
+};
 
 const Login: React.FC = () => {
+  if (firebase.apps.length === 0) firebase.initializeApp(firebaseConfig);
+  const [user, setUser] = useContext(LoginContext);
+  const { register, handleSubmit, errors } = useForm<Inputs>();
+  const onSubmit = (data: Inputs) => signInWithEmailAndPassword(data);
+  const signInWithEmailAndPassword = (data: Inputs): void => {
+    firebase.auth().signInWithEmailAndPassword(data.email, data.password)
+      .then((result) => {
+        if (result.user !== null) {
+          const { displayName: name, email } = result.user;
+          setUser({ ...user, isSignIn: true, name, email });
+        }
+    })
+    .catch((error) => alert(error.message));
+  }
   return (
     <div className="container">
       <div className="row">
@@ -11,21 +35,19 @@ const Login: React.FC = () => {
           <div className="text-center">
             <span style={{ fontSize: '2.5rem', color: '#1da1f2' }}><FontAwesomeIcon icon={faTwitter} /></span>
             <h4 className="font-weight-bold">Log in to Twitter</h4>
-            <form>
-              <div className="form-group border-bottom position-relative my-4">
-                <label style={{left: '10px', top: 0}} className="position-absolute text-secondary">Phone, email, or username</label>
-                <input style={{paddingTop: '2rem', paddingBottom: '1.2rem'}} className="form-control border-0 rounded-0" name="email" type="email"/>
+            <form onSubmit={handleSubmit(onSubmit)} className="wasValidated">
+              <div className="form-row">
+                <div className="col-md-12 position-relative mt-4">
+                  <label style={{left: '13px', top: 0}} className="position-absolute text-secondary">Email</label>
+                    <input style={{ paddingTop: '2rem', paddingBottom: '1.2rem', background: '#F7F9FA' }} className={`form-control border-top-0 border-left-0 border-right-0 rounded-0 ${errors.email ? 'is-invalid' : ''}`} name="email" type="email" ref={register({required: true})} />
+                </div>
+                <div className="col-md-12 position-relative my-4">
+                  <label style={{left: '13px', top: 0}} className="position-absolute text-secondary">Password</label>
+                <input style={{ paddingTop: '2rem', paddingBottom: '1.2rem', background: '#F7F9FA' }} className={`form-control border-top-0 border-left-0 border-right-0 rounded-0 ${errors.password ? 'is-invalid' : ''}`} name="password" type="password" ref={register({required: true})} />
+                  </div>
               </div>
-              <div className="form-group border-bottom position-relative my-4">
-                <label style={{left: '10px', top: 0}} className="position-absolute text-secondary">Password</label>
-                <input style={{paddingTop: '2rem', paddingBottom: '1.2rem'}} className="form-control border-0 rounded-0" name="password" type="password"/>
-              </div>
-              <input className="btn btn-primary btn-block py-2 rounded-pill font-weight-bold" type="button" value="Log in"/>
+              <input className="btn btn-primary btn-block py-2 rounded-pill font-weight-bold" type="submit" value="Log in"/>
             </form>
-            <div className="mt-3">
-              <Link className="d-inline-block" to="#">Forgot password?</Link>
-              <Link className="d-inline-block ml-3" to="#">Sign up for Twitter</Link>
-            </div>
           </div>
         </div>
       </div>
